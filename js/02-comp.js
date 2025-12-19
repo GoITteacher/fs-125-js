@@ -6,32 +6,43 @@
  * - Приведение типов операндов
  */
 
-console.log(5 > 4);
+//!=========================================
 
-console.log(10 >= "7");
+// >
+// <
+// >=
+// <=
+// ==
+// ===
 
-console.log("2" > "12");
+//!=========================================
 
-console.log("2" < "12");
+// console.log(5 > 4); // true
 
-console.log("4" == 4);
+// console.log(10 >= 7); // true
 
-console.log("6" === 6);
+// console.log('B' > 'A');
 
-console.log("false" === false);
+// console.log('221' < '2122');
 
-console.log(1 == true);
+// console.log('4' == 4);
 
-console.log(1 === true);
+// console.log('6' === 6); // false
 
-console.log("0" == false);
+// console.log('false' === false); // false
 
-console.log("0" === false);
+// console.log(1 == true); // true
 
-console.log("Papaya" < "papaya");
+// console.log(1 === true); // false
 
-console.log("Papaya" === "papaya");
+// console.log('0' == false); //true
 
-console.log(undefined == null);
+// console.log('0' === false); //false
 
-console.log(undefined === null);
+// console.log('Papaya' < 'papaya');
+
+// console.log('Papaya' === 'papaya');
+
+// console.log(undefined == null); //true
+
+// console.log(undefined === null); //false
