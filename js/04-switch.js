@@ -2,7 +2,34 @@
  * Оператор switch
  */
 
-const username = "Mango";
+const username = 'Mango';
+//!=========================================
+// const userType = 'User';
+
+// switch (userType) {
+//   case 'Admin':
+//     console.log('Hello Admin');
+//     console.log('Hello Admin');
+//     console.log('Hello Admin');
+//     break;
+//   case 'User':
+//     console.log('Hello User');
+//     console.log('Hello User');
+//     console.log('Hello User');
+//     break;
+//   case 'Guest':
+//     console.log('Hello Guest');
+//     console.log('Hello Guest');
+//     console.log('Hello Guest');
+//     break;
+//   case 'Anonym':
+//     console.log('Hello Anonym');
+//     console.log('Hello Anonym');
+//     console.log('Hello Anonym');
+//     break;
+// }
+
+//!=========================================
 
 /**
  * Виконай рефакторинг коду задачі використовуючи switch.
@@ -15,28 +42,57 @@ const username = "Mango";
 
 const daysUntilDeadline = 5;
 
-if (daysUntilDeadline === 0) {
-  console.log("Today");
-} else if (daysUntilDeadline === 1) {
-  console.log("Tomorrow");
-} else if (daysUntilDeadline === 2) {
-  console.log("Overmorrow");
-} else {
-  console.log("Date in the future");
+switch (daysUntilDeadline) {
+  case 0:
+    console.log('Today');
+    break;
+  case 1:
+    console.log('Tomorrow');
+    break;
+  case 2:
+    console.log('Overmorrow');
+    break;
+
+  default:
+    console.log('Date in the future');
 }
 
+// if (daysUntilDeadline === 0) {
+//   console.log('Today');
+// } else if (daysUntilDeadline === 1) {
+//   console.log('Tomorrow');
+// } else if (daysUntilDeadline === 2) {
+//   console.log('Overmorrow');
+// } else {
+//   console.log('Date in the future');
+// }
+
 /*
- * Напиши скрипт выбора опции доставки товара.
- * Опция хранится в переменной option: 1 - самовывоз, 2 - курьер, 3 - почта
+ * Напиши скрипт вибору опції доставки товару.
+ * Опція зберігається в змінній option: 1 - самовивіз, 2 - кур'єр, 3 - пошта
  *
- * В переменную message записать сообщение в зависимости от опции.
- * - 'Вы сможете забрать товар завтра с 12:00 в нашем офисе'
- * - 'Курьер доставит заказ завтра с 9:00 до 18:00'
- * - 'Посылка будет отправлена сегодня'
- * - 'Вам перезвонит менеджер'
+ * У змінну message записати повідомлення в залежності від опції.
+ * - 'Ви зможете забрати товар завтра з 12:00 у нашому офісі'
+ * - 'Кур'єр доставить замовлення завтра з 9:00 до 18:00'
+ * - 'Посилання буде відправлено сьогодні'
+ * - 'Вам передзвонить менеджер'
  */
 
-const option = 1;
-let message = "";
+const option = Number(prompt('Choose the option'));
+let message = '';
+
+switch (option) {
+  case 1:
+    message = 'Ви зможете забрати товар завтра з 12:00 у нашому офісі';
+    break;
+  case 2:
+    message = "Кур'єр доставить замовлення завтра з 9:00 до 18:00";
+    break;
+  case 3:
+    message = 'Посилання буде відправлено сьогодні';
+    break;
+  default:
+    message = 'Вам передзвонить менеджер';
+}
 
 console.log(message);

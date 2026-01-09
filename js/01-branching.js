@@ -6,26 +6,62 @@
  * - Блок else...if
  * - Тернарний оператор
  */
+//!=========================================
+// console.log('Hello world');
+// console.log('Second line');
 
-console.log("Before");
+// const userAge = 22;
 
-console.log("After");
+// if (userAge >= 18) {
+//   console.log('Ласкаво просимо');
+//   console.log('Ласкаво просимо');
+// }
 
-/**
- * -----------------------------
- */
-const points = 5000;
+// console.log('Goodbye');
+//!=========================================
 
-/**
- * -----------------------------
- */
-const balance = 1000;
-let message;
+// console.log('Start');
 
-if (balance >= 0) {
-  message = "Positive";
-} else {
-  message = "Negative";
-}
+// const userAge = 15;
 
-console.log(message);
+// if (userAge >= 18) {
+//   console.log('Проходьте');
+// } else {
+//   console.log('На жаль ви не підходите');
+// }
+
+// console.log('The end');
+
+//!=========================================
+
+// const userType = 'Admin';
+// const userAge = 25;
+// const userBalance = 1000;
+
+// if (userType === 'Admin') {
+//   console.log('Hi');
+// }
+
+// if (userAge >= 18) {
+//   console.log('Hello');
+// }
+
+// if (userBalance > 500) {
+//   console.log('!!');
+//   console.log('!!');
+//   console.log('!!');
+//   console.log('!!');
+//   console.log('!!');
+// } else {
+//   console.log('Sorry');
+//   console.log('Sorry');
+//   console.log('Sorry');
+//   console.log('Sorry');
+//   console.log('Sorry');
+// }
+
+//!=========================================
+// const userAge = 15;
+// const message = userAge > 18 ? 'Hello' : 'Goodbye';
+
+// console.log(message);
