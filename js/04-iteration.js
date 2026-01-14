@@ -7,27 +7,70 @@
  * - Різниця у використанні for и for...of
  */
 
-const friends = ["Mango", "Kiwi", "Poly", "Ajax"];
-console.table(friends);
+//!=========================================
 
-for (let i = 0; i < friends.length; i += 1) {
-  friends[i] += `-${i}`;
+const salaries = [110, 220, 113, 123, 234, 123, 345, 123];
+// let sum = 0;
+
+for (let i = 0; i < salaries.length; i++) {
+  salaries[i] /= 2;
 }
 
-console.table(friends);
+// i = 0
+// for (let i = 3; i < salaries.length; i++) {
+//   sum += salaries[i];
+// }
 
-for (let friend of friends) {
-  console.log(friend);
-  console.log(friends);
-}
+//!=========================================
 
+// const items = [1, 2, 4, 51, 2, 35, 1];
+
+// for (let item of items) {
+//   item = 25;
+// }
+
+//!=========================================
+
+//
+// sum += salaries[1];
+// sum += salaries[2];
+// sum += salaries[3];
+// sum += salaries[4];
+// sum += salaries[5];
+// sum += salaries[6];
+
+//!=========================================
+// const friends = ["Mango", "Kiwi", "Poly", "Ajax"];
+// console.table(friends);
+
+// for (let i = 0; i < friends.length; i += 1) {
+//   friends[i] += `-${i}`;
+// }
+
+// console.table(friends);
+
+// for (let friend of friends) {
+//   console.log(friend);
+//   console.log(friends);
+// }
+
+//!=========================================
+
+// const arr = [10, 2, 1, 3, 5, 1, 2, 5, 1];
+
+// const result = arr.includes(25);
+
+// console.log(result);
+
+//!=========================================
+//!=========================================
 /**
  * Напиши скрипт для обчислення площі прямокутника зі сторонами,
  * значення яких зберігаються у змінній values у вигляді рядка.
  * Значення гарантовано розділені пробілом.
  */
 
-const values = "8 11";
+// const values = "8 11";
 
 /**
  * Напиши скрипт для перебору масиву fruits.
@@ -36,4 +79,6 @@ const values = "8 11";
  * Нумерація елементів повинна починатися з 1.
  */
 
-const fruits = ["🍎", "🍇", "🍑", "🍌", "🍋"];
+// const fruits = ["🍎", "🍇", "🍑", "🍌", "🍋"];
+
+//!=========================================
