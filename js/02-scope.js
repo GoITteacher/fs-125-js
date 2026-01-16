@@ -6,28 +6,23 @@
 
 const globalValue = 10;
 
-console.log(globalValue); // 10
+function task1() {
+  const x = 10;
 
-function foo() {
-  const a = 20;
-  console.log(a); // 20
-  console.log(globalValue); // 10
-
-  for (let i = 0; i < 5; i += 1) {
-    console.log(a); // 20
-    console.log(globalValue); // 10
-
-    if (i === 2) {
-      console.log(a); // 20
-      console.log(globalValue); // 10
+  if (true) {
+    const x = 10;
+    for (let i = 0; i < 1; i++) {
+      const x = 10;
+      if (true) {
+        const x = 10;
+        if (true) {
+          const x = 10;
+          debugger;
+          console.log(globalValue);
+        }
+      }
     }
   }
 }
 
-// ❌ Помилка! Змінна a не доступна в цій області видимості
-console.log(a);
-
-for (let i = 0; i < 3; i += 1) {
-  // ❌ Помилка! Змінна a не доступна в цій області видимості
-  console.log(a);
-}
+task1();
