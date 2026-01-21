@@ -10,23 +10,79 @@
  * - Додавання властивостей
  */
 
-const playlist = {
-  name: "My amazing playlist",
-  rating: 5,
-  tracks: ["track-1", "track-2", "track-3"],
-  isFavourite: true,
-};
+//!=========================================
 
-/**
- * -----------------------------------
- */
-const propertyName = "tracks";
+// const userInfo = ['Vasya', 'Petrenko', 500, 10, 3];
 
-/**
- * -----------------------------------
- */
-function foo(values) {
-  console.log(values);
-  console.log(values.a);
-  console.log(values.b);
-}
+// const userInfo = {
+//   firstname: 'Vasya',
+//   countryCount: 10,
+//   group: 'PZ-17-1/9',
+//   phoneNumber: '0994123123',
+//   email: 'awdawdawd@gmail.com',
+//   langCount: 5,
+//   salary: 550,
+//   friends: ['Romka', 'Ruslan'],
+//   lastname: 'Petrenko',
+
+//   address: {
+//     street: 'Shmidta',
+//     city: 'Dnipro',
+//     country: 'Ukraine',
+//     location: {
+//       lan: 38.123124123123,
+//       lon: 31.344533234123,
+//     },
+//   },
+// };
+
+// userInfo.email
+
+// console.log(userInfo);
+
+//!=========================================
+
+// const user = {
+//   name: 'Vasya',
+//   lastname: 'Petrenko',
+//   address: {
+//     city: 'Dnipro',
+//     country: 'Ukraine',
+//   },
+//   age: 10,
+// };
+
+// user.name = 'Petro';
+// user.age += 25;
+
+// console.log(user);
+// console.log(user.name);
+// console.log(user.lastname);
+// console.log(user.address.city);
+// console.log(user['address'].city);
+// console.log(user.address['country']);
+
+//!=========================================
+
+// const user = {
+//   name: 'Vasya',
+//   age: 25,
+// };
+
+// console.log(user);
+
+// user.phoneNumber = '+3809123123';
+// user.city = 'Dnipro';
+
+// console.log(user);
+
+//!=========================================
+
+// const arr = [];
+
+// console.log(arr);
+
+// arr[0] = 'Hello world';
+// arr[] = 'Hello world';
+
+// console.log(arr);
