@@ -92,3 +92,24 @@ const transactionHistory = [
 ];
 
 const tableEl = document.querySelector('.js-transaction-table');
+
+function itemTemplate(item) {
+  const itemClass = item.amount < 500 ? 'withdraw' : 'deposit';
+
+  return `<tr class="table-item ${itemClass}">
+          <td>${item.id.slice(0, 5)}</td>
+          <td>${item.amount}</td>
+          <td>${item.date}</td>
+          <td>${item.business}</td>
+          <td>${item.name}</td>
+          <td>${item.type}</td>
+          <td>${item.account}</td>
+        </tr>`;
+}
+
+function itemsTemplate(items) {
+  return items.map(itemTemplate).join('');
+}
+
+const markup = itemsTemplate(transactionHistory);
+tableEl.lastElementChild.insertAdjacentHTML('beforeend', markup);

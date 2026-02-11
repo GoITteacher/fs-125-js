@@ -125,3 +125,25 @@ body {
   padding: 10px;
   margin: 5px;
 }
+
+.car-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.car-item {
+  width: 150px;
+  border: 1px solid teal;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.car-item p {
+  margin: 0;
+  padding: 0;
+}
