@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,14 +10,18 @@
   <body>
     <p><a href="index.html">Go back</a></p>
 
-    <form class="js-form feedback-form">
-      <input
-        type="text"
-        name="email"
-        class="form-input"
-        placeholder="Email"
-        required
-      />
+    <!-- <form class="js-form feedback-form">
+      <fieldset>
+        <label for=""
+          ><input
+            type="text"
+            name="email"
+            class="form-input"
+            placeholder="Email"
+            required
+        /></label>
+      </fieldset>
+
       <input
         type="password"
         name="password"
@@ -28,13 +32,21 @@
       <textarea
         cols="30"
         rows="10"
-        name="comment"
+        name="user-comment"
         class="form-textarea"
         placeholder="Comment"
       ></textarea>
       <button class="form-button">Submit</button>
+    </form> -->
+
+    <form action="" class="js-cars-form feedback-form">
+      <input type="text" class="form-input" name="model" />
+      <input type="number" class="form-input" name="price" min="0" />
+      <input type="color" class="form-input" name="color" />
+      <button type="submit">Add Car</button>
     </form>
 
+    <ul class="js-car-list"></ul>
     <script src="./js/03-forms.js"></script>
   </body>
 </html>

@@ -165,3 +165,48 @@ const refs = {
   form: document.querySelector('.js-form'),
   container: document.querySelector('.js-list'),
 };
+
+//!=========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const markup = carsTemplate(cars);
+  refs.container.innerHTML = markup;
+});
+
+//!=========================================
+
+refs.form.addEventListener('submit', e => {
+  e.preventDefault();
+  const borys = new FormData(refs.form);
+  const title = borys.get('query');
+  const type = borys.get('type');
+
+  const filteredArr = cars.filter(car => {
+    const isValidTitle = car.title.includes(title);
+    const isValidType = car.type === type;
+    const isAllType = type === 'all';
+
+    return isValidTitle && (isValidType || isAllType);
+  });
+
+  const markup = carsTemplate(filteredArr);
+  refs.container.innerHTML = markup;
+});
+
+//!=========================================
+function carTemplate(car) {
+  return `<li class="car-item">
+        <img src="https://picsum.photos/720?random=${car.id}" alt="" />
+        <div class="car-info">
+          <h3>${car.title}</h3>
+          <p>Type: ${car.type}</p>
+          <p>Price: ${car.price}$</p>
+        </div>
+      </li>`;
+}
+
+function carsTemplate(cars) {
+  return cars.map(carTemplate).join('');
+}
+
+//!=========================================
