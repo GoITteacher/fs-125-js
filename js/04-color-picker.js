@@ -1,5 +1,5 @@
 let colorPalette = [];
-const LENGTH = 5;
+const LENGTH = 15;
 
 function createPaletteItems() {
   const items = [];
@@ -34,7 +34,7 @@ function hexToRgb(hex) {
 }
 
 createPaletteItems();
-////////////////////////////////////////////////////////////////////////////
+//!=========================================
 
 const refs = {
   itemList: document.querySelector('.js-colors-box'),
@@ -42,18 +42,78 @@ const refs = {
   btnReloadColor: document.querySelector('.js-reload-color'),
   backdropElem: document.querySelector('.js-backdrop'),
 };
+//!=========================================
 
-////////////////////////////////////////////////////////////////////////////
+let modalInstance;
 
-/* 
-nodeName
-<li class="color-item">
-    <button class="color-body" style="background-color:...;"></button>
+function showModal(color) {
+  modalInstance = basicLightbox.create(
+    `
+      <div class="modal" style="width: 500px; height:500px; background-color:${color};"></div>
+    `,
+    {
+      onShow: () => {
+        console.log('OPEN MODAL');
+        document.addEventListener('keydown', handleCloseModal);
+      },
+      onClose: () => {
+        console.log('CLOSE MODAL');
+        document.removeEventListener('keydown', handleCloseModal);
+      },
+    },
+  );
+
+  modalInstance.show();
+}
+
+function handleCloseModal(e) {
+  console.log(e.code);
+
+  if (e.code === 'Escape') {
+    modalInstance.close();
+  }
+}
+
+//!=========================================
+
+refs.itemList.addEventListener('click', e => {
+  if (!e.target.classList.contains('js-btn')) {
+    return;
+  }
+
+  const color = e.target.dataset.color;
+
+  showModal(color);
+});
+
+//!=========================================
+
+refs.backdropElem.addEventListener('click', e => {
+  if (e.target === e.currentTarget) {
+    hideModal();
+  }
+});
+
+//!=========================================
+
+function colorTemplate(obj) {
+  return `<li class="color-item">
+    <button class="color-body js-btn" data-color="${obj.hex}" style="background-color:${obj.hex};"></button>
     <div class="color-footer">
-        <div>HEX: ....</div>
-        <div>RGB: ....</div>
+        <div>HEX: ${obj.hex}</div>
+        <div>RGB: ${obj.rgb}</div>
         <div></div>
     </div>
-</li>
+</li>`;
+}
 
-*/
+function colorsTemplate(arr) {
+  return arr.map(colorTemplate).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const markup = colorsTemplate(colorPalette);
+  refs.itemList.innerHTML = markup;
+});
+
+//!=========================================
