@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "vite",
-    "build": "vite build --base=/test/",
+    "build": "vite build --base=/fs-125-js/",
     "preview": "vite preview",
     "push": "git add .; git commit -m 'update'; git push;",
     "init-dir": "mkdir src; touch src/index.html src/main.ts src/style.css"
@@ -24,6 +24,9 @@
     "vite": "^4.0.5"
   },
   "dependencies": {
+    "basiclightbox": "^5.0.4",
+    "simplelightbox": "^2.14.3",
+    "toastify-js": "^1.12.0",
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-html-inject": "^1.0.1"
   },
