@@ -7,7 +7,6 @@
 - terminal
 - node-js / CLI
 - npm
-
   - init
   - install
   - dependencies
