@@ -16,6 +16,11 @@ jobs:
           npm install
           npm run build
 
+      - name: Say Hello
+        run: |
+          echo Hello world
+          echo Second Hello world
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
