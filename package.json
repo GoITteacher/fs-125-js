@@ -6,7 +6,8 @@
     "start": "vite",
     "build": "vite build --base=/test/",
     "preview": "vite preview",
-    "push": "git add .; git commit -m 'update'; git push;"
+    "push": "git add .; git commit -m 'update'; git push;",
+    "init-dir": "mkdir src; touch src/index.html src/main.ts src/style.css"
   },
   "repository": {
     "type": "git",
