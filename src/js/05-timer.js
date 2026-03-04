@@ -3,53 +3,48 @@
  * запускати та зупиняти відлік часу
  */
 
-class Timer {
-  constructor() {}
+const startBtn = document.querySelector('button[data-action-start]');
+const stopBtn = document.querySelector('button[data-action-stop]');
+const clockface = document.querySelector('.js-clockface');
 
-  start() {}
+let intervalId;
 
-  stop() {}
+startBtn.addEventListener('click', () => {
+  console.log('START');
+  const futureTime = new Date('2026-03-04 21:34:00');
 
-  /*
-   * - Приймає час в мілісекундах
-   * - Вираховує скільки в них вміщається годин/хвилин/секунд
-   * - Повертає об'єкт з властивостями hours, mins, secs
-   * - Адська копіпаста з stackoverflow 💩
-   */
-  getTimeComponents(time) {
-    const hours = this.pad(
-      Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    );
-    const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
-    const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+  intervalId = setInterval(() => {
+    console.log('TICK');
+    const currentTime = Date.now();
+    const diff = futureTime - currentTime;
 
-    return { hours, mins, secs };
-  }
+    const str = msToTime(diff);
+    clockface.innerHTML = str;
 
-  /*
-   * Приймає число, перетворює його в рядок і додає в початок 0, якщо число менше 2-х знаків
-   */
-  pad(value) {
-    return String(value).padStart(2, "0");
-  }
-}
-
-const startBtn = document.querySelector("button[data-action-start]");
-const stopBtn = document.querySelector("button[data-action-stop]");
-const clockface = document.querySelector(".js-clockface");
-
-const timer = new Timer({
-  onTick: updateClockface,
+    if (diff <= 0) {
+      clearInterval(intervalId);
+    }
+  }, 1000);
 });
 
-// startBtn.addEventListener("click", timer.start.bind(timer));
-// stopBtn.addEventListener("click", timer.stop.bind(timer));
+stopBtn.addEventListener('click', () => {
+  console.log('STOP');
+  clearInterval(intervalId);
+});
 
-/*
- * - Приймає час в мілісекундах
- * - Вираховує скільки в них вміщається годин/хвилин/секунд
- * - Рисує інтерфейс
- */
-function updateClockface({ hours, mins, secs }) {
-  clockface.textContent = `${hours}:${mins}:${secs}`;
+// function convertMsToTime(ms) {
+//   const sec = Math.round((ms / 1000) % 60);
+//   console.log(sec);
+// }
+
+function msToTime(ms) {
+  let seconds = parseInt((ms / 1000) % 60);
+  let minutes = parseInt((ms / (1000 * 60)) % 60);
+  let hours = parseInt((ms / (1000 * 60 * 60)) % 24);
+
+  hours = hours < 10 ? '0' + hours : hours;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+
+  return hours + ':' + minutes + ':' + seconds;
 }
