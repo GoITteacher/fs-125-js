@@ -2,6 +2,7 @@
 
 ## [LIST api](https://github.com/public-apis/public-apis?tab=readme-ov-file):
 
+1. [GOIT server](https://q10gsl5s9d.execute-api.us-east-1.amazonaws.com/docs)
 1. [HERO](https://rapidapi.com/jakash1997/api/superhero-search/)
 1. [QUOTES](https://rapidapi.com/martin.svoboda/api/quotes15/)
 1. [TRANSlATE1](https://rapidapi.com/lebedev.str/api/just-translated/)
