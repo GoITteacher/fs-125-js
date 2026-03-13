@@ -1,126 +1,113 @@
 import {
-  deleteUser,
-  getUsers,
-  resetUser,
-  updateUser,
+  getStudentsList,
+  createStudent,
+  updateStudent,
+  replaceStudent,
+  deleteStudent,
 } from './modules/usersAPI';
-import { createUser } from './modules/usersAPI';
 
-// ===================================================
 const refs = {
   userListElem: document.querySelector('.js-user-list'),
   createUserForm: document.querySelector('.js-create-form'),
   updateUserForm: document.querySelector('.js-update-form'),
   resetUserForm: document.querySelector('.js-reset-form'),
-  deleteUserForm: document.querySelector('.js-delete-form'),
 };
 
-// ============================================================
-
-refs.createUserForm.addEventListener('submit', onCreateUser);
-refs.updateUserForm.addEventListener('submit', onUpdateUser);
-refs.resetUserForm.addEventListener('submit', onResetUser);
-refs.deleteUserForm.addEventListener('submit', onDeleteUser);
-
-function onCreateUser(e) {
-  e.preventDefault();
-
-  const myData = {
-    email: e.target.elements.userEmail.value,
-    name: e.target.elements.userName.value,
-    phone: e.target.elements.userPhone.value,
-    img: `https://source.unsplash.com/720x1280/?random=${Math.random()}&girl,portret,celebrity`,
-  };
-
-  createUser(myData).then(newUser => {
-    const markup = userTemplate(newUser);
-    refs.userListElem.insertAdjacentHTML('afterbegin', markup);
-  });
-
-  e.target.reset();
-}
-function onUpdateUser(e) {
-  e.preventDefault();
-
-  const myData = {};
-  const formData = new FormData(refs.updateUserForm);
-
-  formData.forEach((value, key) => {
-    if (value) {
-      myData[key] = value;
-    }
-  });
-
-  updateUser(myData).then(updatedUser => {
-    const markup = userTemplate(updatedUser);
-    const oldUser = document.querySelector(`[data-id="${myData.id}"]`);
-    oldUser.insertAdjacentHTML('afterend', markup);
-    oldUser.remove();
-  });
-
-  e.target.reset();
-}
-function onResetUser(e) {
-  e.preventDefault();
-
-  const myData = {};
-  const formData = new FormData(refs.resetUserForm);
-
-  formData.forEach((value, key) => {
-    myData[key] = value;
-  });
-
-  resetUser(myData).then(updatedUser => {
-    const markup = userTemplate(updatedUser);
-    const oldUser = document.querySelector(`[data-id="${myData.id}"]`);
-    oldUser.insertAdjacentHTML('afterend', markup);
-    oldUser.remove();
-  });
-
-  e.target.reset();
-}
-function onDeleteUser(e) {
-  e.preventDefault();
-
-  const id = e.target.elements.userId.value;
-
-  deleteUser(id)
-    .then(() => {
-      const oldUser = document.querySelector(`[data-id="${id}"]`);
-      oldUser.remove();
-    })
-    .catch(err => {
-      console.log(err);
-    });
-
-  e.target.reset();
-}
-
-// ============================================================
-
-getUsers().then(users => {
-  const markup = usersTemplate(users);
-  refs.userListElem.innerHTML = markup;
+document.addEventListener('click', e => {
+  console.log(e.target.nodeName);
 });
 
-// ============================================================
+//!=========================================
+refs.userListElem.addEventListener('click', e => {
+  if (e.target.nodeName !== 'BUTTON') return;
+  const liCard = e.target.closest('li');
+  const id = liCard.dataset.id;
 
-function userTemplate({ id, name, img, email, phone }) {
-  return `<li class="card user-item" data-id="${id}">
-  <img
-    src="https://source.unsplash.com/720x1280/?random=${id}&girl,portret,celebrity"
-    alt="#"
-    class="user-avatar"
-  />
-  <h3 class="user-title">${name}</h3>
-  <p>Phone: ${email}</p>
-  <p>Email: ${phone}</p>
-  <button class="btn button">DELETE</button>
-</li>`;
+  deleteStudent(id)
+    .then(() => {
+      liCard.remove();
+    })
+    .catch(err => {
+      console.log('awdawd');
+    });
+});
+
+//!=========================================
+refs.updateUserForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+
+  const id = formData.get('userId');
+
+  const body = {
+    firstName: formData.get('firstName') || undefined,
+    lastName: formData.get('lastName') || undefined,
+    major: formData.get('major') || undefined,
+    cohortYear: formData.get('cohortYear') || undefined,
+  };
+
+  updateStudent(id, body)
+    .then(res => {
+      const liCard = document.querySelector(`li[data-id="${id}"]`);
+      const markup = studentTemplate(res.item);
+      liCard.outerHTML = markup;
+      e.target.reset();
+    })
+    .catch(() => {});
+});
+
+//!=========================================
+refs.createUserForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+
+  const obj = {
+    firstName: formData.get('firstName'),
+    lastName: formData.get('lastName'),
+    major: formData.get('major'),
+    cohortYear: formData.get('cohortYear'),
+  };
+
+  createStudent(obj)
+    .then(res => {
+      const student = res.item;
+      const markup = studentTemplate(student);
+      refs.userListElem.insertAdjacentHTML('afterbegin', markup);
+    })
+    .catch(() => {});
+
+  e.target.reset();
+});
+
+//!=========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  getStudentsList()
+    .then(res => {
+      const arr = res.items;
+      const markup = studentsTemplate(arr);
+      refs.userListElem.innerHTML = markup;
+    })
+    .catch(() => {});
+});
+
+//!=========================================
+function studentTemplate(student) {
+  return `<li class="card user-item" data-id="${student._id}">
+        <img
+          src="https://picsum.photos/200?random=${student._id}"
+          alt="#"
+          class="user-avatar"
+        />
+        <h3 class="user-title">${student.firstName} ${student.lastName}</h3>
+        <p>major: ${student.major}</p>
+        <p>cohortYear: ${student.cohortYear}</p>
+        <p>${student._id}</p>
+        <button class="btn button">DELETE</button>
+      </li>`;
 }
 
-function usersTemplate(arr) {
-  return arr.map(userTemplate).join('\n\n\n\n');
+function studentsTemplate(arr) {
+  return arr.map(studentTemplate).join('');
 }
-
-// =======================================
