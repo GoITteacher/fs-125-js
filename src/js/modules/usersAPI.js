@@ -1,25 +1,30 @@
-import axios from 'axios';
+import Axios from 'axios';
 
-const server = axios.create({
+const axios = Axios.create({
   baseURL: 'http://localhost:3000',
 });
 
-export function getUsers() {
-  return server.get('/users').then(res => res.data);
+export async function getUsers() {
+  const res = await axios.get('/users');
+  return res.data;
 }
 
-export function createUser(data) {
-  return server.post('/users', data).then(res => res.data);
+export async function createUser(data) {
+  const res = await axios.post('/users', data);
+  return res.data;
 }
 
-export function updateUser(id, user) {
-  return server.patch(`/users/${id}`, user).then(res => res.data);
+export async function updateUser(id, user) {
+  const res = await axios.patch(`/users/${id}`, user);
+  return res.data;
 }
 
-export function resetUser(id, user) {
-  return server.put(`/users/${id}`, user).then(res => res.data);
+export async function resetUser(id, user) {
+  const res = await axios.put(`/users/${id}`, user);
+  return res.data;
 }
 
-export function deleteUser(id) {
-  return server.delete(`/users/${id}`).then(res => res.data);
+export async function deleteUser(id) {
+  const res = await axios.delete(`/users/${id}`);
+  return res.data;
 }

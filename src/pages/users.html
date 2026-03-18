@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -59,14 +59,11 @@
 
         <button type="submit" class="btn btn-primary">Перезаписати</button>
       </form>
-
-      <form class="card form-inline search-form js-delete-form">
-        <div class="form-group">Id: <input type="text" name="userId" /></div>
-        <button type="submit" class="btn btn-primary">Видалити</button>
-      </form>
     </div>
 
-    <ul class="news-list js-user-list">
+    <div class="loader hidden js-loader"></div>
+
+    <ul class="news-list user-list js-user-list">
       <li class="card user-item" data-id="${id}">
         <img
           src="https://source.unsplash.com/1280x720/?random=431&book"
