@@ -1,64 +1,25 @@
-export class BooksAPI {
-  constructor() {
-    this.BASE_URL = 'http://localhost:3000';
-    this.END_POINT = '/books';
-    this.API_KEY = '123123';
-  }
+import axios from 'axios';
 
-  getBooks() {
-    const url = this.BASE_URL + this.END_POINT;
-    return fetch(url).then(res => res.json());
-  }
+const server = axios.create({
+  baseURL: 'http://localhost:3000',
+});
 
-  createBook(data) {
-    const url = this.BASE_URL + this.END_POINT;
+export function getBooks() {
+  return server.get('/books').then(res => res.data);
+}
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
+export function createBook(data) {
+  return server.post('/books', data).then(res => res.data);
+}
 
-    return fetch(url, options).then(res => res.json());
-  }
+export function updateBook(id, book) {
+  return server.patch(`/books/${id}`, book).then(res => res.data);
+}
 
-  updateBook(id, book) {
-    const url = `${this.BASE_URL}${this.END_POINT}/${id}`;
+export function resetBook(id, book) {
+  return server.put(`/books/${id}`, book).then(res => res.data);
+}
 
-    const options = {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(book),
-    };
-
-    return fetch(url, options).then(res => res.json());
-  }
-
-  resetBook(id, book) {
-    const url = `${this.BASE_URL}${this.END_POINT}/${id}`;
-
-    const options = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(book),
-    };
-
-    return fetch(url, options).then(res => res.json());
-  }
-
-  deleteBook(id) {
-    const url = `${this.BASE_URL}${this.END_POINT}/${id}`;
-
-    const options = {
-      method: 'DELETE',
-    };
-
-    return fetch(url, options).then(res => res.json());
-  }
+export function deleteBook(id) {
+  return server.delete(`/books/${id}`).then(res => res.data);
 }
