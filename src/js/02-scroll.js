@@ -1,8 +1,6 @@
 import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-
-import { fetchArticles } from './modules/newsAPI2.js';
-import { articlesTemplate } from './templates/render-function2.js';
+import { fetchArticles } from './modules/newsAPI';
+import { articlesTemplate } from './templates/render-functions';
 
 const refs = {
   formElem: document.querySelector('.js-search-form'),
@@ -11,109 +9,63 @@ const refs = {
   loadElem: document.querySelector('.js-loader'),
 };
 
-// ======================================
+//!=========================================
+
+const PER_PAGE = 8;
 let query;
-let page;
-let maxPage;
+let currentPage;
+let totalPages;
 
-refs.formElem.addEventListener('submit', onFormSubmit);
+//!=========================================
 
-// ======================================
-
-async function onFormSubmit(e) {
+refs.formElem.addEventListener('submit', async e => {
   e.preventDefault();
-  query = e.target.elements.query.value.trim();
-  page = 1;
+  const formData = new FormData(e.target);
+  query = formData.get('query').trim();
+  currentPage = 1;
 
-  if (!query) {
-    showError('Empty field');
+  if (query === '') {
+    iziToast.error('Заповніть усі поля');
     return;
   }
 
-  showLoader();
+  vasya.unobserve(refs.targetElem);
 
-  try {
-    const data = await fetchArticles(query, page);
-    if (data.totalResults === 0) {
-      showError('Sorry!');
-    }
-    maxPage = data.total_pages;
-    refs.articleListElem.innerHTML = '';
-    renderArticles(data.articles);
-  } catch (err) {
-    showError(err);
-  }
+  const res = await fetchArticles(query, currentPage);
+  const markup = articlesTemplate(res.articles);
+  refs.articleListElem.innerHTML = markup;
+  totalPages = Math.ceil(res.totalResults / PER_PAGE);
 
-  hideLoader();
   checkObserverStatus();
-  e.target.reset();
-}
+});
 
-async function onLoadMore() {
-  page += 1;
-  showLoader();
-  const data = await fetchArticles(query, page);
-  renderArticles(data.articles);
-  hideLoader();
-  checkObserverStatus();
+async function loadMore() {
+  currentPage += 1;
+  vasya.unobserve(refs.targetElem);
 
-  scrollBy({
-    behavior: 'smooth',
-    top: 1000,
-  });
-}
-
-// ======================================
-function renderArticles(articles) {
-  const markup = articlesTemplate(articles);
+  const res = await fetchArticles(query, currentPage);
+  const markup = articlesTemplate(res.articles);
   refs.articleListElem.insertAdjacentHTML('beforeend', markup);
-}
 
-function observeTarget() {
-  console.log('observe');
-  observer.observe(refs.targetElem);
+  checkObserverStatus();
 }
-function unobserveTarget() {
-  console.log('unobserve');
-  observer.unobserve(refs.targetElem);
-}
+//!=========================================
 
-function showLoader() {
-  refs.loadElem.classList.remove('hidden');
-}
-function hideLoader() {
-  refs.loadElem.classList.add('hidden');
-}
-
-function showError(msg) {
-  iziToast.error({
-    title: 'Error',
-    message: msg,
-  });
-}
+const vasya = new IntersectionObserver(entries => {
+  const entry = entries[0];
+  if (entry.isIntersecting) {
+    console.log('Викликаю LoadMore');
+    loadMore();
+  }
+});
 
 function checkObserverStatus() {
-  if (page >= maxPage) {
-    unobserveTarget();
-    showError('Sorry! The End!');
+  console.log('Перевірка чи треба вирубати Васю');
+  if (currentPage >= totalPages) {
+    vasya.unobserve(refs.targetElem);
+    console.log('Вирубили Васю');
   } else {
-    observeTarget();
+    console.log('Підняли Васю');
+    vasya.observe(refs.targetElem);
   }
 }
-// ========================================
-
-const options = {
-  root: document.querySelector('#scrollArea'),
-  rootMargin: '0px',
-  threshold: 1.0,
-};
-
-const callback = function (entries, observer) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      onLoadMore();
-    }
-  });
-};
-
-const observer = new IntersectionObserver(callback, options);
